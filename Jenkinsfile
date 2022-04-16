@@ -99,7 +99,7 @@ pipeline {
         }
 
 
-        stage('K8S Deploy') {
+        stage('kubernetesDeploy') {
           kubernetesDeploy(
                  kubeconfigId: 'k8s',
                  enableConfigSubstitution: true
