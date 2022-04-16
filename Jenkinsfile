@@ -98,11 +98,13 @@ pipeline {
             }
         }
         stage('Kubernetes Deploy') {
+            steps {
             kubernetesdeploy(
                 configs: 'helm/vprofilecharts/templates/vproappdep.yaml',
                 kubeconfigId: 'k8s',
                 enableConfigSubstitution: true
             )
+            }
         }
 
     }
