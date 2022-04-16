@@ -98,14 +98,17 @@ pipeline {
             }
         }
 
-        stage ('K8S Deploy') {
 
-             kubernetesDeploy(
-                    configs: 'sh "helm upgrade --install --force vproifle-stack helm/vprofilecharts --set appimage=${registry}:${BUILD_NUMBER} --namespace prod"',
-                    kubeconfigId: 'k8s',
-                    enableConfigSubstitution: true
-                    )
+        stage('K8S Deploy') {
+          kubernetesDeploy(
+                 kubeconfigId: 'k8s',
+                 enableConfigSubstitution: true
+                 )
+          steps{
+            sh "helm upgrade --install --force vproifle-stack helm/vprofilecharts --set appimage=${registry}:${BUILD_NUMBER} --namespace prod"
+          }
         }
+
 
     }
 
